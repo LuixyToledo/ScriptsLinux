@@ -1,0 +1,29 @@
+#!/bin/bash
+comparar(){
+	if [ $1 -gt $num2 ];then
+		resultado=1;
+	fi
+	if [ $1 -lt $num2 ];then
+		resultado=2;
+	fi
+	if [ $1 -eq $num2 ];then
+		resultado=3;
+	fi
+	
+}
+read -p 'Introduce un numero: ' num2;
+while [ -z $num2 ];do
+	read -p 'Introduce un numero: ' num2;
+done
+
+comparar $1 $num2;
+
+if [ $resultado -eq 1 ];then
+	echo 'El numero mayor es el: '$1;
+fi
+if [ $resultado -eq 2 ];then
+	echo 'El numero mayor es el: '$num2;
+fi
+if [ $resultado -eq 3 ];then
+	echo 'Ambos numeros son iguales';
+fi

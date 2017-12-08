@@ -1,0 +1,13 @@
+#!/bin/bash
+dirbackup='backup';
+compruebabackup=`ls -l | grep $dirbackup | cut -c1 | head -1`;
+if [ $compruebabackup != 'd' ];then
+	mkdir $dirbackup;
+fi
+numarg=$#;
+recorrido=1;
+while [ $recorrido -le $numarg ];do
+	cp -r $1 $dirbackup;
+	shift;
+	recorrido=`expr $recorrido + 1`;
+done

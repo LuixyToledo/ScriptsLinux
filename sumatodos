@@ -1,0 +1,11 @@
+#!/bin/bash
+numarg=$#;
+recorrido=1;
+suma=0;
+while [ $recorrido -le $numarg ];do
+	suma=`expr $1 + $suma`;
+	shift;
+	recorrido=`expr $recorrido + 1`;
+done
+
+echo 'El resultado de la suma es: '$suma;

@@ -1,0 +1,14 @@
+#!/bin/bash
+fichero=$1;
+while [ ! -f $fichero ];do
+	read -p 'Introduce un fichero: ' fichero;
+done
+comprobacion=`ls -l $fichero | cut -c4`;
+if [ $comprobacion == '-' ];then
+	echo 'El fichero '$fichero' no tiene permisos de ejecucion. Se le agregaran a continuacion.';
+	chmod u+x $fichero;
+	ls -l $fichero;
+fi
+if [ $comprobacion == 'x' ];then
+	echo 'El fichero '$fichero' ya tiene permisos de ejecucion';
+fi

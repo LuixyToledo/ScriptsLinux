@@ -1,0 +1,18 @@
+#!/bin/bash
+test -d $1;
+if [ $? -eq 0 ];then
+	cuentafich=`ls -l $1 | cut -c1 | grep - | wc -l`;
+	cuentadir=`ls -l $1 | cut -c1 | grep d | wc -l`;
+	echo 'El directorio: '$1' tiene '$cuentafich' ficheros y '$cuentadir' directorios';
+	exit;
+fi
+test -d $1;
+if [ $? -gt 0 ];then
+	echo 'Errorlevel: '$?;
+	exit;
+fi
+test -f $1;
+if [ $? -gt 0 ];then
+	echo 'Errorlevel: '$?;
+	exit;
+fi

@@ -1,0 +1,10 @@
+#!/bin/bash
+opc=0;
+while [ $opc -ne 3 ] || [ -z $opc ];do
+	clear;
+	echo '-----MENU-----';
+	echo '1.- Opcion 1';
+	echo '2.- Opcion 2';
+	echo '3.- Salir';
+	read -p 'Introduce un numero del 1 al 3: ' opc;
+done

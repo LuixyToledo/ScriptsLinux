@@ -1,0 +1,32 @@
+#!/bin/bash
+if [ $# -lt 2 ];
+	echo 'Introduce al menos dos ficheros';
+	exit;
+fi
+calculo(){
+	maxlineasnombre=`tail -1 $fichunido | cut -d ' ' -f2`;
+	minlineasnombre=`head -1 $fichunido | cut -d ' ' -f2`;
+	maxlineasnumero=`tail -1 $fichunido | cut -d ' ' -f1`;
+	minlineasnumero=`head -1 $fichunido | cut -d ' ' -f1`;
+	echo 'El fichero con mas lineas es: '$maxlineasnombre' con un total de: '$maxlineasnumero' lineas.';
+	echo 'El fichero con menos lineas es: '$minlineasnombre' con un total de: '$minlineasnumero' lineas.';
+	
+}
+numficheros=$#;
+recorrido=1;
+
+while [ $recorrido -le $numficheros ];do
+	wc -l $1 | tr -s ' ' | cut -d ' ' -f1 >> numlineas;
+	echo $1 >> cuentalineas;
+	shift;
+	recorrido=`expr $recorrido + 1`;
+done
+
+paste -d ' ' numlineas cuentalineas > todo;
+sort -n todo > todo_ordenado;
+fichunido='todo_ordenado';
+calculo $fichunido;
+rm numlineas;
+rm cuentalineas;
+rm todo;
+rm todo_ordenado;

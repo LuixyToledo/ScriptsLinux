@@ -1,0 +1,28 @@
+#!/bin/bash
+fichero=$1;
+accion=0;
+while [ ! -f $fichero ];do
+	read -p 'Introduce un fichero existente: ' fichero;
+done
+echo '-----MENU-----';
+echo 'Escribe -S- o -s- para eliminar el fichero o -N- o -n- para no eliminarlo.';
+
+read -p '¿Seguro que quieres eliminar el fichero? ' eliminar;
+
+if [ $eliminar == 'S' ] || [ $eliminar == 's' ] || [ $eliminar == 'N' ] || [ $eliminar == 'n' ];then
+	accion=1;
+fi
+
+if [ $accion -ne 1 ];then
+	. borra $fichero;
+fi
+
+if [ $accion -eq 1 ];then
+	if [ $eliminar == 'N' ] || [ $eliminar == 'n' ];then
+		echo 'El fichero' $fichero 'no se eliminara';
+	fi
+	if [ $eliminar == 'S' ] || [ $eliminar == 's' ];then
+		rm $fichero;
+		echo 'El fichero' $fichero 'se ha eliminado';
+	fi
+fi

@@ -1,0 +1,41 @@
+#!/bin/bash
+principal (){
+	if [ -n $ficheronoexiste ];then
+		echo 'Codigo fichero no existe: '$ficheronoexiste;
+	fi
+	if [ -n $directorionoexiste ];then
+		echo 'Codigo directorio no existe: '$directorionoexiste;
+	fi
+	if [ -n $copiacorrecta ];then
+		echo 'Codigo copia correcta: '$copiacorrecta;
+	fi
+	if [ -n $existeiguales ];then
+		echo 'Codigo fichero existe y iguales:'$existeiguales;
+	fi
+}
+copia() {
+	ls -l | tr -s ' ' | cut -d ' ' -f9 > fichsdirectorio;
+	compruebafich=`grep $fichero fichsdirectorio`;
+	if [ ! -f $fichero ];then
+		ficheronoexiste=2;
+	fi
+	if [ ! -d $directorio ];then
+		directorionoexiste=3;
+	fi
+	if [ -z $compruebafich ];then
+		cp $fichero $directorio;
+		copiacorrecta=0;
+	else
+		comparacion=`cmp $fichero $directorio/$compruebafich`;
+		if [ -n $comparacion ];then
+			rm $directorio/$compruebafich;
+			cp $fichero $directorio/$fichero;
+		else
+			existeiguales=1;	
+		fi
+	fi
+	principal $ficheronoexiste $directorionoexiste $copiacorrecta $existeiguales;
+}
+read -p 'Introduce un fichero: ' fichero;
+read -p 'Introduce un directorio: ' directorio;
+copia $fichero $directorio;

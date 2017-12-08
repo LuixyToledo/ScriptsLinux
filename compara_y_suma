@@ -1,0 +1,25 @@
+#!/bin/bash
+num1=$1;
+num2=$2;
+while [ -z $num1 ];do
+	echo 'No has introducido ningun numero, por favor introduce 2.';
+	read -p 'Introduce el primer numero: ' num1;
+	read -p 'Introduce el segundo numero: ' num2;
+done
+while [ -z $num2 ];do
+	echo 'No has introducido el segundo numero.';
+	read -p 'Introduce el segundo numero' num2;
+done
+if [ $num1 -gt $num2 ];then
+	resultadosuma=`expr $num1 + $num2`;
+	echo 'El '$num1' es mayor que '$num2;
+	echo 'El resultado de la suma es '$resultadosuma;
+fi
+if [ $num1 -lt $num2 ];then
+	resultadoresta=`expr $num1 - $num2`;
+	echo 'El '$num1' es menor que '$num2;
+	echo 'El resultado de la resta es '$resultadoresta;
+fi
+if [ $num1 -eq $num2 ];then
+	echo 'El '$num1' y el '$num2' son iguales';
+fi

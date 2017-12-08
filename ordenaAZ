@@ -1,0 +1,32 @@
+#!/bin/bash
+aoz=$1;
+fichero=$2;
+contador=0;
+while [ -z $aoz ];do
+	read -p 'Introduce una letra del alfabeto (a, A, z, Z): ' aoz;
+done
+while [ ! -f $fichero ] || [ -z $fichero ];do
+	read -p 'Introduce un fichero existente: ' fichero;
+done
+if [ $aoz == 'a' ];then
+	sort $fichero;
+	contador=1;
+fi
+if [ $aoz == 'A' ];then
+	sort $fichero;
+	contador=1;
+fi
+if [ $aoz == 'z' ];then
+	sort -r $fichero;
+	contador=1;
+fi
+if [ $aoz == 'Z' ];then
+	sort -r $fichero;
+	contador=1;
+fi
+
+if [ $contador -ne 1 ];then
+	echo 'No has introducido (a, A, z, Z). Por favor escoge una de esas letras';
+	aoz=' ';
+	. ordenaAZ $aoz $fichero;
+fi

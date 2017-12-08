@@ -1,0 +1,14 @@
+#!/bin/bash
+opcion=$1;
+if [ $opcion -eq 1 ];then
+	echo 'Mostrando contenido de: '$ruta;
+	ls $ruta;
+fi
+if [ $opcion -eq 2 ];then
+	echo 'Mostrando contenido y permisos de: '$ruta;
+	ls -l $ruta;
+fi
+if [ $opcion -eq 3 ];then
+	echo 'Dando permisos de lectura a el directorio: '$ruta' para el grupo.';
+	chmod 040 $ruta;
+fi

@@ -1,0 +1,13 @@
+#!/bin/bash
+usuario=$1;
+while [ -z $usuario ];do
+	read -p 'Introduce un nombre de usuario' usuario;
+done
+who | tr -s ' ' | cut -d ' ' -f1 | uniq > buscador;
+comprobar=`grep $usuario buscador`;
+if [ $comprobar == $usuario ];then
+	echo 'El usuario: '$usuario' esta conectado a la maquina';
+else
+	echo 'El usuario: '$usuario' no esta conectado a la maquina';
+fi
+

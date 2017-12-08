@@ -1,0 +1,23 @@
+#!/bin/bash
+invariable=1;
+destino='/copias_work';
+carpetacopia='work';
+horacopia=`date '+%d_%m_%Y_%H_%M'`;
+if [ ! -d $destino ];then
+	mkdir $destino;
+fi
+if [ ! -d $carpetacopia ];then
+	mkdir $carpetacopia;
+fi
+while [ $invariable -eq 1 ];do
+echo 'Al llegar el contador de tiempo a 300 seg (5 min) se realizara la copia.';
+for i in `seq 1 300`
+do
+	i=`expr $i + 1`;
+	echo 'Tiempo copia: '$i;
+	sleep 1;
+	clear;
+done
+tar -cvf $destino/$horacopia $carpetacopia;
+done
+

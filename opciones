@@ -1,0 +1,14 @@
+#!/bin/bash
+opcion=$1;
+while [ $opcion -lt 1 ] || [ $opcion -gt 3 ];do
+	read -p 'Introduce una opcion entre 1 y 3: ' opcion;
+done
+if [ $opcion -eq 1 ];then
+	ls;
+fi
+if [ $opcion -eq 2 ];then
+	ps;
+fi
+if [ $opcion -eq 3 ];then
+	echo $0;
+fi

@@ -1,0 +1,17 @@
+#!/bin/bash
+read -p 'Introduce un directorio: ' directorio;
+while [ ! -d $directorio ];do
+	read -p 'Introduce un directorio: ' directorio;
+done
+ruta=$directorio;
+export ruta;
+echo $ruta;
+echo '-----MENU-----';
+echo '1.- Mostrar contenido del directorio.';
+echo '2.- Mostrar contenido y permisos de los ficheros del directorio.';
+echo '3.- Dar permiso de lectura a el directorio para el grupo.';
+read -p 'Introduce una opcion: ' opc;
+while [ $opc -lt 1 ] || [ $opc -gt 3 ] || [ -z $opc ];do
+	read -p 'Introduce una opcion: ' opc;
+done
+. anidado $opc;

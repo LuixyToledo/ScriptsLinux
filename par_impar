@@ -1,0 +1,15 @@
+#!/bin/bash
+num=0;
+par_impar (){
+	resto=`expr $num % 2`;
+	if [ $resto -eq 0 ];then
+		echo 'El numero: '$num' es par';
+	else
+		echo 'El numero: '$num' es impar';
+	fi
+}
+
+while [ $num -lt 10 ];do
+	num=`expr $num + 1`;
+	par_impar $num;
+done

@@ -1,0 +1,16 @@
+#!/bin/bash
+plantilla=$1;
+directorio=$2;
+if [ -z $directorio ];then
+	usuario=`whoami`;
+	directorio=`echo '/home/'$usuario`;
+fi
+ls | grep ^$plantilla > ficherosmover;
+numficheros=`wc -l | cut -d ' ' -f1 ficherosmover`;
+
+for val in `seq 1 $numficheros`
+do
+	ficheroamover=`mawk NR==$val ficherosmover`;
+	mv $ficheroamover $directorio;	
+done
+rm ficherosmover;

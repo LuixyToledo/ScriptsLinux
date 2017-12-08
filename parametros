@@ -1,0 +1,11 @@
+#!/bin/bash
+numarg=$#;
+recorrido=1;
+if [ $numarg -eq 0 ];then
+	echo 'Error. No has pasado ningun argumento';
+fi
+while [ $recorrido -le $numarg ];do
+	echo $1;
+	shift;
+	recorrido=`expr $recorrido + 1`;
+done

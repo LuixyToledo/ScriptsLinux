@@ -1,0 +1,37 @@
+#!/bin/bash
+ls -l > listado;
+numlistado=`wc -l listado | tr -s ' ' | cut -d ' ' -f1`;
+for val in `seq 1 $numlistado`
+do
+	linea=`mawk NR==$val listado | tr -s ' '`;
+	echo $linea > temporal;
+	nombre=`head -1 temporal | cut -d ' ' -f9`;
+	dirfich=`cut -c1 temporal`;
+	lectura=`cut -c2 temporal`;
+	escritura=`cut -c3 temporal`;
+	ejecucion=`cut -c4 temporal`;
+	if [ $dirfich == 'd' ];then
+		tipo='directorio';
+	else
+		tipo='fichero';
+	fi
+	if [ $lectura == 'r' ];then
+		permlectura='tiene permiso de lectura';
+	else
+		permlectura='no tiene permiso de lectura';
+	fi
+	if [ $escritura == 'w' ];then
+		permescritura='tiene permiso de escritura';
+	else
+		permescritura='no tiene permiso de escritura';
+	fi
+	if [ $ejecucion == 'x' ];then
+		permejecucion='tiene permiso de ejecucion';
+	else
+		permejecucion='no tiene permiso de ejecucion';
+	fi
+	echo 'El '$tipo' , '$nombre' , '$permlectura' , '$permescritura' , '$permejecucion'.';
+	
+done
+rm listado;
+rm temporal;

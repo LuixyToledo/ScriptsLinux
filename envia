@@ -1,0 +1,24 @@
+#!/bin/bash
+fichero=$1;
+mensaje=' ';
+echo ' ' > ./mensaje;
+if [ -z $fichero ];then
+	while [ -z $mensaje ];do
+		read -p 'Escribe el mensaje: ' mensaje;
+		echo $mensaje > ./mensaje;
+	done
+fi
+who | tr -s ' ' | cut -d ' ' -f1-2 > usuarios;
+numerousuarios=`wc -l usuarios | tr -s ' ' | cut -d ' ' -f1`;
+for val in `seq 2 $numerousuarios`
+do
+	usuarioenviar=`mawk NR==$val usuarios`;
+	if [ ! -z $fichero ];then
+		write $usuarioenviar < $fichero;
+	else
+		write $usuarioenviar < mensaje;
+	fi
+	val=`expr $val + 1`;
+done
+rm usuarios;
+rm mensaje;

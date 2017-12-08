@@ -1,0 +1,15 @@
+#!/bin/bash
+$fichero=$1;
+while [ ! -f $fichero ];do
+	read -p 'Introduce un fichero para enviar: ' $fichero;
+done
+who | tr -s ' ' | cut -d ' ' -f1-2 | grep ^p > usuarios;
+numerousuarios=`wc -l usuarios | tr -s ' ' | cut -d ' ' -f1`;
+val=1;
+for val in `seq 1 $numerousuarios`
+do
+	usuarioenviar=`mawk NR==$val usuarios`;
+	write $usuarioenviar < $fichero;
+	val=`expr $val + 1`;
+done
+

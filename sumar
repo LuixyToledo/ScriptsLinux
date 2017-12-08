@@ -1,0 +1,15 @@
+#!/bin/bash
+sumar (){
+	resultado=`expr $num1 + $num2`;
+	echo 'El resultado de sumar '$num1' y '$num2' es '$resultado;
+}
+num1=$1;
+num2=$2;
+while [ -z $num1 ];do
+	read -p 'Introduce el primer operando: ' num1;
+done
+while [ -z $num2 ];do
+	read -p 'Introduce el segundo operando: ' num2;
+done
+
+sumar $num1 $num2;

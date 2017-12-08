@@ -1,0 +1,34 @@
+#!/bin/bash
+usuario=`whoami`;
+if [ $usuario == 'root' ];then
+	echo 'Eres usuario root';
+	read -p 'Exprensa en minutos el tiempo que tiene que pasar para apagar el PC: ' tiempomin;
+	while [ -z $tiempomin ];do
+		read -p 'Exprensa en minutos el tiempo que tiene que pasar para apagar el PC: ' tiempomin;
+	done
+	echo 'El ordenador se va a apagar en '$tiempomin' minutos';
+	shutdown -r +$tiempomin;
+	echo 'Hasta luego';
+	sleep 1;
+	exit;
+else
+	echo 'No eres usuario root';
+	echo '-----MENU-----';
+	echo '1.- Si';
+	echo '2.- No';
+	echo 'PULSA 1 o 2';
+	read -p '¿Quieres loguearte como superusuario? ' super;
+	while [ $super -lt 1 ] || [ $super -gt 2 ];do
+		read -p '¿Quieres loguearte como superusuario? ' super;
+	done
+	if [ $super -eq 1 ];then
+		sudo su;
+		. apaga;
+	fi
+	if [ $super -eq 2 ];then
+		echo 'Logueate como superusuario antes de ejecutar el script o seleccionalo en el menu, deja de probar errore Sole';
+		echo 'Hasta Luego';
+		sleep 1;
+		exit;
+	fi
+fi

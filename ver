@@ -1,0 +1,15 @@
+#!/bin/bash
+if [ -z $1 ];then
+	echo 'No has introducido ningun parametro';
+	echo 'Introduce al menos un fichero';
+	exit;
+fi
+numarg=$#;
+recorrido=1;
+
+while [ $recorrido -le $numarg ];do
+	echo $1;
+	cat $1;
+	shift;
+	recorrido=`expr $recorrido + 1`;
+done

@@ -1,0 +1,18 @@
+#!/bin/bash
+patron=$1;
+while [ -z $patron ];do
+	read -p 'Introduce un patron de busqueda: ' patron;
+done
+ls -l | tr -s ' ' | cut -d ' ' -f9 | grep $patron > nombrefichero;
+numficheros=`wc -l nombrefichero | tr -s ' ' | cut -d ' ' -f1`;
+val=1;
+for val in `seq 1 $numficheros`
+do
+	fichero=`mawk NR==$val nombrefichero`;
+	compascii=`file -bi $fichero | cut -d '-' -f3`;
+	if [ $compascii == 'ascii' ];then
+		echo 'El fichero '$fichero' cumple el patron: '$patron;
+	fi
+	val=`expr $val + 1`;
+done
+rm nombrefichero;

@@ -1,0 +1,17 @@
+#!/bin/bash
+$fichero=$1;
+while [ -z $fichero ];do
+	read -p 'Introduce un argumento: ' fichero;
+done
+if [ -f $fichero ];then
+	echo 'El fichero: '$fichero' es un fichero existente'; 
+fi
+if [ -d $fichero ];then
+	echo 'El argumento: '$fichero' es un directorio existente';
+fi
+ls ./ > arbolfichero
+comprobar=`grep '$fichero' ./arbolfichero`;
+if [ -z $comprobar ];then
+	echo 'El argumento: '$fichero' no es ni un argumento ni un directorio';
+fi
+rm ./arbolfichero
